@@ -1,0 +1,41 @@
+
+Linux 환경 변수와 관련하여서 
+
+Linux와 Unix 기반 시스템에서 사용하는 다양한 환경 변수들은 운영체제가 어떻게 파일과 프로그램을 찾고 관리하는지에 영향을 미칩니다.
+여기서 언급한 PATH와 LD_LIBRARY_PATH 외에도 여러 중요한 환경 변수들이 있습니다. 각각의 환경 변수는 특정한 목적과 역할을 가지고 있습니다.
+
+
+
+1. PATH
+- 실행 파일을 검색할 디렉토리들의 목록입니다. 쉘은 이 변수에 명시된 디렉토리들을 순서대로 검색하여 사용자가 실행하려는 프로그램을 찾습니다.
+- PATH 의 경우는 Matlab의 addpath 같은걸 생각하면된다. 해당하는 폴더에 없어도 그 폴더를 먼저 찾아보는 효과를 갖는다. 
+2. LD_LIBRARY_PATH
+- 동적 링커가 동적 라이브러리(.so 파일)를 찾을 때 검색하는 디렉토리의 목록입니다. 프로그램이 시작할 때 필요한 공유 라이브러리를 로딩하는 데 사용됩니다.
+- PATH와 같은데 이건 so 파일(라이브러리)파일을 찾을 때만 사용한다. 
+
+1,2 번 모두 
+
+export PATH=$PATH:/home/user/myprograms
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/myprograms
+
+이런식으로 사용하는데 
+PATH를 여러개 추가할 경우
+export LD_LIBRARY_PATH=path1
+export LD_LIBRARY_PATH=path2:$LD_LIBRARY_PATH
+
+이런식으로 혹은 
+export LD_LIBRARY_PATH=path1:path2
+
+이렇게 추가하며 export LD_LIBRARY_PATH=path2:$LD_LIBRARY_PATH 이것의 의미는 이미 있는 PATH 에 path2 를 추가하는 것이고
+:의 위치가 앞에 있냐 뒤에 있냐에 따라서 우선순위가 바뀔수 있다. (path1 의폴더에 있는 파일을 먼저 실행할지 path2 에 있는 파일을 먼저 실행할 지 결정)
+
+
+
+
+이외에도 3~8번이 있지만 많이 쓰지 않을것같아서 적지 않습니다. -> 궁금하면 찾아보기
+3. CLASSPATH
+4. HOME
+5. MANPATH
+6. C_INCLUDE_PATH / CPLUS_INCLUDE_PATH
+7. DYLD_LIBRARY_PATH
+8. PYTHONPATH
