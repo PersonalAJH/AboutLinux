@@ -1,0 +1,40 @@
+1. 정적 IP 설정 (고정 IP 주소 설정)
+    - 정적 IP 설정은 네트워크 인터페이스에 고정된 IP 주소를 수동으로 할당하는 방법입니다. 이 설정을 사용하면 IP 주소가 변하지 않고, 네트워크에 재연결될 때도 동일한 IP 주소를 유지합니다. 서버, 프린터 등 네트워크 장치가 항상 같은 IP 주소를 사용해야 하는 환경에서 주로 사용됩니다.
+
+    -   /etc/network/interfaces 설정파일
+    - 설정
+==============================================
+        auto eth0
+        iface eth0 inet static
+        address 192.168.1.100
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+        dns-nameservers 8.8.8.8 8.8.4.4
+==============================================
+        - eth0: 네트워크 인터페이스 이름입니다.
+        - address: 고정할 IP 주소입니다.
+        - netmask: 서브넷 마스크입니다.
+        - gateway: 기본 게이트웨이(라우터의 IP)입니다.
+        - dns-nameservers: DNS 서버 주소입니다.
+
+    - 설정 적용 : sudo systemctl restart networking
+
+
+
+2. 동적 IP 설정 (DHCP)
+    - 동적 IP 설정은 **DHCP(Dynamic Host Configuration Protocol)**를 통해 자동으로 IP 주소를 할당받는 방식입니다. 네트워크에 연결될 때마다 IP 주소가 DHCP 서버에 의해 자동으로 할당됩니다. 클라이언트 장치(컴퓨터, 스마트폰 등)들이 네트워크에 쉽게 연결될 수 있도록 해줍니다.
+    - /etc/network/interfaces 설정파일
+    - 설정
+
+==============================================
+        auto eth0
+        iface eth0 inet dhcp
+==============================================
+        - eth0: 네트워크 인터페이스 이름입니다.
+        - inet dhcp: DHCP를 통해 IP 주소를 자동으로 할당받겠다는 설정입니다.
+
+    - 설정 적용 : sudo systemctl restart networking
+
+
+
+
