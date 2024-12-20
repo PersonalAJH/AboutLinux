@@ -1,0 +1,21 @@
+이 경우는 realsense 를 이용해서 사용
+상황 : 기본적으로 window 에 있는 장비를 wsl 에서 사용하는 것이 불가능
+WSL 2에서 USB 장치를 사용할 때, 기본적으로 WSL은 USB 장치를 직접 접근할 수 없습니다. 그래서 **usbipd-win**을 사용해야 WSL 환경에서 USB 장치를 인식하고 사용할 수 있습니다. 하지만 몇 가지 대안을 고려해 볼 수 있습니다.
+
+
+window 에서 usbipd 가 설치되어 있어야 하며 해당 장비를 share 로 만들어야 한다. 
+
+
+1. 장치 목록 확인 (powershell)
+usbipd wsl list
+
+2. wsl 연결 상태 확인  (powershell)
+usbipd wsl --status
+
+
+3. 장치 연결 (powershell)
+usbipd wsl attach --busid <BUSID>
+usbipd attach --busid 1-14 --wsl (예시)
+
+4. wsl 내에서 연결되었는지 확인 (wsl)
+lsusb
